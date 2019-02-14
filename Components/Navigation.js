@@ -3,7 +3,31 @@ import { Container, Text, Button } from "native-base";
 import { Grid, Row } from "react-native-easy-grid";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import { Constants } from "expo";
+import HistoryScreen from "../Screens/HistoryScreen";
+import ResultScreen from "../Screens/ResultScreen";
+import ScannerScreen from "../Screens/ScannerScreen";
 
+const RootStack = createStackNavigator (
+  {
+    Scanner: {
+      screen: ScannerScreen
+    },
+    History: {
+      screen: HistoryScreen
+    },
+    Result: {
+      screen:ResultScreen
+    }
+  },
+  {
+    initialRouteName: "Scanner" //Default Screen name
+  }
+);
+
+export default createAppContainer(RootStack);
+
+
+/*
 //First Screen Coponent
 class ScannerScreen extends React.Component {
   static navigationOptions = {
@@ -97,3 +121,4 @@ const RootStack = createStackNavigator(
   }
 );
 export default createAppContainer(RootStack);
+*/

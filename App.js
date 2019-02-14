@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Container,
   Header,
@@ -19,6 +19,8 @@ import { AppLoading, Constants } from "expo";
 
 import Navigation from "./Components/Navigation";
 
+import SQL from "./Components/SQL";
+
 export default class AnatomyExample extends Component {
   constructor(props) {
     super(props);
@@ -31,8 +33,10 @@ export default class AnatomyExample extends Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
+    SQL.InitDatabase();
     this.setState({ loading: false });
   }
+  
   render() {
     if(this.state.loading) {
       return <AppLoading />;
