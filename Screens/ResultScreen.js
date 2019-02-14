@@ -11,6 +11,9 @@ class ResultScreen extends React.Component {
     title: "Scan Detail"
   };
   render() {
+
+    const qr = this.props.navigation.getParam("qr", "NO-QR");
+
     return (
       <Container style={{ marginTop: Constants.statusBarHeight }}>
         <Grid
@@ -19,7 +22,7 @@ class ResultScreen extends React.Component {
           }}
         >
           <Row>
-            <Text>Result Screen</Text>
+            <Text>{qr}</Text>
           </Row>
         </Grid>
       </Container>
