@@ -1,5 +1,5 @@
 import React from "react";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Container,
   Text,
@@ -12,15 +12,9 @@ import {
   Body,
   Button
 } from "native-base";
-
-import { Grid, Row } from "react-native-easy-grid";
-
-import { AppLoading, Constants } from "expo";
-import SQL from "../Components/SQL";
-
-
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Message } from "../Components/commons";
+import { Constants } from "expo";
+import SQL from "../components/SQL";
+import { Message } from "../components/commons";
 
 class HistoryScreen extends React.Component {
   constructor(props) {
@@ -34,30 +28,30 @@ class HistoryScreen extends React.Component {
 
   async componentDidMount() {
     let qrs = await SQL.GetQRS();
-    this.setState({ qrs });
+    this.setState({ qrs, fetching: false });
   }
 
   render() {
     let { qrs, fetching } = this.state;
 
-    if(fetching) {
+    if (fetching) {
       return (
         <Message>
-          <Spinner color="green"/>
+          <Spinner color="green" />
         </Message>
       );
     } else if (qrs === null || qrs.length === 0) {
       return (
         <Message>
-          <Text>No Records</Text>
+          <Text>No records</Text>
         </Message>
       );
     } else
       return (
-        <Container style={{ marginTop: Constants.statusBarHeight }}>
+        <Container>
           <Content>
             {qrs.map(qr => (
-              <QRListItem key={qr.id} qr={qr} {...this.props}/>
+              <QRListItem key={qr.id} qr={qr} {...this.props} />
             ))}
           </Content>
         </Container>
@@ -70,7 +64,7 @@ export const QRListItem = props => {
     <List>
       <ListItem thumbnail>
         <Left>
-          <MaterialCommunityIcons name="qrcode" size={70} color="green"/>
+          <MaterialCommunityIcons name="qrcode" size={70} color="green" />
         </Left>
         <Body>
           <Text numberOfLines={2}>{props.qr.value}</Text>
@@ -80,8 +74,8 @@ export const QRListItem = props => {
           <Button
             transparent
             onPress={() => {
-              props.navigation.navigate("Result",{
-                qr:props.qr.value
+              props.navigation.navigate("Result", {
+                qr: props.qr.value
               });
             }}
           >

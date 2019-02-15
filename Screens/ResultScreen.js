@@ -1,14 +1,9 @@
 import React from "react";
-
-import { Container, Text, Button, Content } from "native-base";
-
-import { Grid, Row } from "react-native-easy-grid";
-
-import { AppLoading, Constants } from "expo";
-
 import { Dimensions, Clipboard, StyleSheet } from "react-native";
-
+import { Container, Text, Button, Content } from "native-base";
+import { Constants } from "expo";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Grid, Row } from "react-native-easy-grid";
 
 class ResultScreen extends React.Component {
   static navigationOptions = {
@@ -30,19 +25,19 @@ class ResultScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const qr = this.props.navigation.getParam("qr", "NO-QR");
+    const qr = navigation.getParam("qr", "NO-QR");
     let { height: screenHeight } = Dimensions.get("window");
     screenHeight = screenHeight - 400;
 
     return (
       <Container style={{ marginTop: Constants.statusBarHeight }}>
-      <Content>
+        <Content>
           <Grid>
-            <Row style={style.qrCard}>
+            <Row style={styles.qrCard}>
               <MaterialCommunityIcons name="qrcode" size={70} color="green" />
-              <Text style={style.qrTitle}>{qr}</Text>
+              <Text style={styles.qrTitle}>{qr}</Text>
             </Row>
-            <Row style={style.copyButton}>
+            <Row style={styles.copyButton}>
               <Button
                 danger={!this.state.copied}
                 success={this.state.copied}
@@ -50,7 +45,7 @@ class ResultScreen extends React.Component {
                   this.copyToClipboard(qr);
                 }}
               >
-                <Text style={style.copyButtonTitle}>Copy to Clipboard</Text>
+                <Text style={styles.copyButtonTitle}>Copy to Clipboard</Text>
               </Button>
             </Row>
           </Grid>
@@ -60,7 +55,7 @@ class ResultScreen extends React.Component {
   }
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   qrCard: {
     flex: 1,
     flexDirection: "row",
@@ -76,7 +71,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     marginTop: 350
   },
-  copyButtonTitle: { color: "white"}
+  copyButtonTitle: { color: "white" }
 });
 
 export default ResultScreen;

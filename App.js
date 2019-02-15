@@ -1,25 +1,7 @@
-import React, { Component } from 'react';
-import {
-  Container,
-  Header,
-  Title,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Text
-} from "native-base";
-
-import { Grid, Row } from "react-native-easy-grid";
-
-import { AppLoading, Constants } from "expo";
-
-import Navigation from "./Components/Navigation";
-
-import SQL from "./Components/SQL";
+import React, { Component } from "react";
+import { AppLoading } from "expo";
+import Navigation from "./components/Navigation";
+import SQL from "./components/SQL";
 
 export default class AnatomyExample extends Component {
   constructor(props) {
@@ -36,50 +18,12 @@ export default class AnatomyExample extends Component {
     SQL.InitDatabase();
     this.setState({ loading: false });
   }
-  
+
   render() {
-    if(this.state.loading) {
+    if (this.state.loading) {
       return <AppLoading />;
     }
-    return <Navigation />
-    /*
-    if(this.state.loading) {
-      return <AppLoading />;
-    }
-    return (
-      <Container style={{ marginTop: Constants.statusBarHeight }}>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-        <Body>
-          <Title> Header </Title>
-        </Body>
-        <Right />
-      </Header>
-      <Grid
-        style={{ alignItems: "center",
-        justifyContent: "center"
-      }}
-      >
-        <Row>
-          <Text> This is Content Section </Text>
-        </Row>
-        <Row>
-          <Text> Hello World </Text>
-        </Row>
-      </Grid>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
-  );
-  */
+
+    return <Navigation />;
   }
 }
